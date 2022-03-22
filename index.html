@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Mesto Russia</title>
+</head>
+<body class="page">
+    <div class="container">
+        <header class="header">
+            <img class="logo" src="/mesto/images/logo.png" alt="Место Россия">
+        </header>
+
+        <main class="main">
+            <section class="profile">
+                
+                <div class="profile__card">
+                    <img class="profile__img" src="/mesto/images/profile_img.jpg" alt="Фото">
+                        <div class="profile__info">
+                            <div class="profile__title">
+                                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                                <img class="edit-button" src="/mesto/images/edit_button.png" alt="Редактировать">
+                            </div>
+                            <p class="profile__description">Исследователь океана</p>
+                        </div>
+                </div>
+                <img class="add-button" src="/mesto/images/add.png" alt="Добавить фото">
+            </section>
+
+            <ul class="fotos">
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/karachaevo.jpg" alt="Карачаево-Черкессия">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Карачаево-Черкессия</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/elbrus.jpg" alt="Эльбрус">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Гора Эльбрус</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/dombai.jpg" alt="Домбай">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Домбай</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/elbrus.jpg" alt="Эльбрус">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Гора Эльбрус</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/dombai.jpg" alt="Домбай">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Домбай</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+
+                <li class="fotos__card">
+                    <img class="fotos__img" src="/mesto/images/karachaevo.jpg" alt="Карачаево-Черкессия">
+                    <div class="fotos__heading">
+                        <h2 class="fotos__title">Карачаево-Черкессия</h2>
+                        <img src="/mesto/images/like.png" alt="В избранное" class="like">
+                    </div>
+                </li>
+            </ul>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__copy">&copy; 2020 Mesto Russia</p>
+        </footer>
+
+        <section class="popup">
+            <div class="popup__container">
+                <h2 class="popup__title">
+                    Редактировать профиль
+                </h2>
+                <form action="submit">
+                    <div class="popup__inputs">
+                        <input class="input-field input-name" type="text" value="Жак-Ив Кусто">
+                        <input class="input-field input-descr" type="text" value="Исследователь океанов">
+                    </div>
+                    <button class="popup__button">Сохранить</button>
+                </form>
+                <img class="popup__close" src="/mesto/images/Close Icon.png" alt="Закрыть">
+            </div>
+            
+
+        </section>
+    </div>
+    <script src="/mesto/script.js"></script>
+</body>
+</html>
