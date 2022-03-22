@@ -1,0 +1,11 @@
+.fotos__card {
+    max-width: 282px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 770px) {
+    .fotos__card {
+        max-width: 500px;
+    }
+}

@@ -37,7 +37,6 @@ function formSubmitHandler (evt) {
 
         profileName.textContent = nameInput;
         profileJob.textContent = jobInput;
-     
 }
 
 formElement.addEventListener('submit', formSubmitHandler); 
