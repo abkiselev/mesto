@@ -44,4 +44,3 @@ formElement.addEventListener('submit', formSubmitHandler);
 savePopup.addEventListener('click', function () {
     popup.classList.remove("popup_active");
 });
-
