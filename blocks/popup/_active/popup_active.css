@@ -1,9 +1,3 @@
 .popup_active {
     display: block;
 }
-
-@media (max-width: 425px) {
-    .popup_active {
-        display: block;
-    }
-}

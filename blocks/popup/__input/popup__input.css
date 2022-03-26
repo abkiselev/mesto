@@ -1,4 +1,4 @@
-.input-field {
+.popup__input {
     width: 99%;
     border: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -9,4 +9,5 @@
     margin-bottom: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
+    outline: none;
 }

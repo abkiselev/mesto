@@ -10,74 +10,74 @@
 <body class="page">
     <div class="container">
         <header class="header">
-            <img class="logo" src="./images/logo.png" alt="Место Россия">
+            <img class="logo" src="./images/logo.svg" alt="Место Россия">
         </header>
 
         <main class="main">
             <section class="profile">
-                
                 <div class="profile__card">
                     <img class="profile__img" src="./images/profile_img.jpg" alt="Фото">
                         <div class="profile__info">
                             <div class="profile__title">
                                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                                <img class="edit-button" src="./images/edit_button.png" alt="Редактировать">
+                                <button class="profile__edit-button" type="button"></button>
                             </div>
                             <p class="profile__description">Исследователь океана</p>
                         </div>
                 </div>
-                <img class="add-button" src="./images/add.png" alt="Добавить фото">
+                <button class="profile__add-button" type="button"></button>
             </section>
+                <section>
+                    <ul class="fotos">
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Карачаево-Черкессия</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
 
-            <ul class="fotos">
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Карачаево-Черкессия</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Гора Эльбрус</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
 
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Гора Эльбрус</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Домбай</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
 
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Домбай</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Гора Эльбрус</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
 
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Гора Эльбрус</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Домбай</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
 
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Домбай</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
-
-                <li class="fotos__card">
-                    <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
-                    <div class="fotos__heading">
-                        <h2 class="fotos__title">Карачаево-Черкессия</h2>
-                        <img src="./images/like.png" alt="В избранное" class="like">
-                    </div>
-                </li>
-            </ul>
+                        <li class="fotos__card">
+                            <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
+                            <div class="fotos__heading">
+                                <h2 class="fotos__title">Карачаево-Черкессия</h2>
+                                <button class="like" type="button"></button>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
         </main>
 
         <footer class="footer">
@@ -89,14 +89,14 @@
                 <h2 class="popup__title">
                     Редактировать профиль
                 </h2>
-                <form>
-                    <div class="popup__inputs">
-                        <input class="input-field input-name" type="text" value="Жак-Ив Кусто">
-                        <input class="input-field input-descr" type="text" value="Исследователь океанов">
-                    </div>
+                <form name="edit-prifile">
+                    <fieldset class="popup__inputs">
+                        <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто">
+                        <input class="popup__input popup__input_type_descr" type="text" value="Исследователь океанов">
+                    </fieldset>
                     <button type="submit" class="popup__button">Сохранить</button>
                 </form>
-                <img class="popup__close" src="./images/Close_Icon.png" alt="Закрыть">
+                <button class="popup__close" type="button"></button>
             </div>
             
         </section>
