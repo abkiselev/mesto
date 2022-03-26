@@ -11,3 +11,5 @@ HTML, CSS, БЭМ, JavaScript
 
 **Ссылка на GitHub Pages**
 https://abkiselev.github.io/mesto/
+
+1
