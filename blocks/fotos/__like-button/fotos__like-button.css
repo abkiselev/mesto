@@ -1,5 +1,5 @@
-.like {
-    background-image: url(../../images/like.svg);
+.fotos__like-button {
+    background-image: url(../../../images/like.svg);
     background-color: transparent;
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,6 +11,6 @@
     padding: 0;
 }
 
-.like:hover {
+.fotos__like-button:hover {
     opacity: 0.6;
 }

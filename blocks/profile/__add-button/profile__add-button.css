@@ -9,6 +9,8 @@
     padding: 23px 73px;
     transition: all 0.2s ease;
     border-radius: 2px;
+    display: block;
+    width: 150px;
 }
 
 .profile__add-button:hover {

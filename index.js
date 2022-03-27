@@ -1,6 +1,6 @@
 let editProfile = document.querySelector('.profile__edit-button');
 let addFoto = document.querySelector('.add-button');
-let like = document.querySelectorAll('.like');
+let like = document.querySelectorAll('.fotos__like-button');
 let closePopup = document.querySelector('.popup__close');
 let savePopup = document.querySelector('.popup__button');
 let popup = document.querySelector('.popup');
@@ -38,6 +38,6 @@ savePopup.addEventListener('click', function () {
 
 like.forEach(function(like) {
     like.addEventListener('click', function () {
-        like.classList.toggle("like_active");
+        like.classList.toggle("fotos__like-button_active");
     })
 });
