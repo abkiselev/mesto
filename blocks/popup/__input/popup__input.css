@@ -10,3 +10,19 @@
     transition: all 0.2s ease;
     outline: none;
 }
+
+.popup__input:focus::-webkit-input-placeholder {
+    color: transparent
+}
+  
+.popup__input:focus::-moz-placeholder {
+    color: transparent
+}
+
+.popup__input:focus:-moz-placeholder {
+    color: transparent
+}
+
+.popup__input:focus:-ms-input-placeholder {
+    color: transparent
+}

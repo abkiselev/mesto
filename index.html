@@ -29,53 +29,7 @@
             </section>
                 <section>
                     <ul class="fotos">
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Карачаево-Черкессия</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
 
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Гора Эльбрус</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
-
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Домбай</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
-
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/elbrus.jpg" alt="Эльбрус">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Гора Эльбрус</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
-
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/dombai.jpg" alt="Домбай">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Домбай</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
-
-                        <li class="fotos__card">
-                            <img class="fotos__img" src="./images/karachaevo.jpg" alt="Карачаево-Черкессия">
-                            <div class="fotos__heading">
-                                <h2 class="fotos__title">Карачаево-Черкессия</h2>
-                                <button class="fotos__like-button" type="button"></button>
-                            </div>
-                        </li>
                     </ul>
                 </section>
         </main>
@@ -84,23 +38,62 @@
             <p class="footer__copy">&copy; 2020 Mesto Russia</p>
         </footer>
 
-        <section class="popup">
-            <div class="popup__container">
-                <h2 class="popup__title">
-                    Редактировать профиль
-                </h2>
-                <form name="edit-prifile">
-                    <fieldset class="popup__inputs">
-                        <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто">
-                        <input class="popup__input popup__input_type_descr" type="text" value="Исследователь океанов">
-                    </fieldset>
-                    <button type="submit" class="popup__button">Сохранить</button>
-                </form>
-                <button class="popup__close" type="button"></button>
-            </div>
-            
-        </section>
     </div>
+
+    <section id="edit-profile-popup" class="popup">
+        <div class="popup__container">
+            <h2 class="popup__title">
+                Редактировать профиль
+            </h2>
+            <form name="edit-profile" class="edit-profile">
+                <fieldset class="popup__inputs">
+                    <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто">
+                    <input class="popup__input popup__input_type_descr" type="text" value="Исследователь океанов">
+                </fieldset>
+                <button type="submit" class="popup__button">Сохранить</button>
+            </form>
+            <button class="popup__close" type="button"></button>
+        </div>
+        <div class="popup__bg"></div>
+    </section>
+
+    <section id="add-foto-popup" class="popup">
+        <div class="popup__container">
+            <h2 class="popup__title">
+                Новое место
+            </h2>
+            <form name="add-card" class="add-foto">
+                <fieldset class="popup__inputs">
+                    <input class="popup__input popup__input_type_mesto-name" type="text" value="" placeholder="Название" required>
+                    <input class="popup__input popup__input_type_mesto-url" type="text" value="" placeholder="Ссылка на картинку" required>
+                </fieldset>
+                <button type="submit" class="popup__button popup__add-button">Создать</button>
+            </form>
+            <button class="popup__close" type="button"></button>
+        </div>
+        <div class="popup__bg"></div>
+    </section>
+
+    <section id="foto-popup" class="popup">
+        <div class="popup__foto">
+            <img class="popup__img" src="#" alt="Фото">
+            <h2 class="popup__text">Фото</h2>
+            <button class="popup__close" type="button"></button>
+        </div>
+        <div class="popup__bg"></div>
+    </section>
+
+    <template id="card-template">
+        <li class="fotos__card">
+            <img class="fotos__img" src="" alt="">
+            <div class="fotos__heading">
+                <h2 class="fotos__title"></h2>
+                <button class="fotos__like-button" type="button"></button>
+            </div>
+            <button class="fotos__trash-button" type="button"></button>
+        </li>
+    </template>
+
     <script src="./index.js"></script>
 </body>
 </html>

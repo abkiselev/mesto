@@ -2,6 +2,7 @@
     max-width: 282px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 @media (max-width: 770px) {
