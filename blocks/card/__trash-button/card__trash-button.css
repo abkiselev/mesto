@@ -1,4 +1,4 @@
-.fotos__trash-button {
+.card__trash-button {
     position: absolute;
     background-image: url(../../../images/trash.svg);
     background-color: transparent;
@@ -14,6 +14,6 @@
     right: 20px;
 }
 
-.fotos__trash-button:hover {
+.card__trash-button:hover {
     opacity: 0.6;
 }

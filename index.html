@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto Russia</title>
 </head>
 <body class="page">
@@ -28,7 +28,7 @@
                 <button class="profile__add-button" type="button"></button>
             </section>
                 <section>
-                    <ul class="fotos">
+                    <ul class="cards">
 
                     </ul>
                 </section>
@@ -40,15 +40,15 @@
 
     </div>
 
-    <section id="edit-profile-popup" class="popup">
+    <section id="edit-profile-popup" class="popup popup_type_edit-profile">
         <div class="popup__container">
             <h2 class="popup__title">
                 Редактировать профиль
             </h2>
             <form name="edit-profile" class="edit-profile">
                 <fieldset class="popup__inputs">
-                    <input class="popup__input popup__input_type_name" type="text" value="Жак-Ив Кусто">
-                    <input class="popup__input popup__input_type_descr" type="text" value="Исследователь океанов">
+                    <input class="popup__input popup__input_type_name" type="text" value="" required>
+                    <input class="popup__input popup__input_type_descr" type="text" value="" required>
                 </fieldset>
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
@@ -57,7 +57,7 @@
         <div class="popup__bg"></div>
     </section>
 
-    <section id="add-foto-popup" class="popup">
+    <section id="add-foto-popup" class="popup popup_type_add-card">
         <div class="popup__container">
             <h2 class="popup__title">
                 Новое место
@@ -74,7 +74,7 @@
         <div class="popup__bg"></div>
     </section>
 
-    <section id="foto-popup" class="popup">
+    <section id="foto-popup" class="popup popup_type_foto-popup">
         <div class="popup__foto">
             <img class="popup__img" src="#" alt="Фото">
             <h2 class="popup__text">Фото</h2>
@@ -84,16 +84,17 @@
     </section>
 
     <template id="card-template">
-        <li class="fotos__card">
-            <img class="fotos__img" src="#" alt="Фото">
-            <div class="fotos__heading">
-                <h2 class="fotos__title"></h2>
-                <button class="fotos__like-button" type="button"></button>
+        <li class="card">
+            <img class="card__img" src="#" alt="Фото">
+            <div class="card__heading">
+                <h2 class="card__title"></h2>
+                <button class="card__like-button" type="button"></button>
             </div>
-            <button class="fotos__trash-button" type="button"></button>
+            <button class="card__trash-button" type="button"></button>
         </li>
     </template>
 
-    <script src="./index.js"></script>
+    <script src="./scripts/cards.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

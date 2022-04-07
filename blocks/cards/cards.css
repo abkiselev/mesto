@@ -1,4 +1,4 @@
-.fotos {
+.cards {
     list-style-type: none;
     padding: 0;
     display: grid;
@@ -8,7 +8,7 @@
 }
 
 @media (max-width: 770px) {
-    .fotos {
+    .cards {
         grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
     }
 }

@@ -1,4 +1,4 @@
-.fotos__like-button {
+.card__like-button {
     background-image: url(../../../images/like.svg);
     background-color: transparent;
     background-size: cover;
@@ -11,6 +11,6 @@
     padding: 0;
 }
 
-.fotos__like-button:hover {
+.card__like-button:hover {
     opacity: 0.6;
 }

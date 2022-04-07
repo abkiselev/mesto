@@ -17,7 +17,7 @@
     border-radius: 10px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 770px) {
     .popup__container {
         padding: 25px;
         width: 87%;
