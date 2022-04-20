@@ -93,10 +93,18 @@ function likeCard() {
 
 function openPopup(popupActiveElement) {
     popupActiveElement.classList.add("popup_active");
+    document.addEventListener('keydown', closePopupOnEscape)
 };
 
 function closePopup(popupActiveElement) {
     popupActiveElement.classList.remove("popup_active");
+    document.removeEventListener('keydown', closePopupOnEscape);
+};
+
+function closePopupOnEscape(event){
+    if (event.key === 'Escape'){
+        closePopup(popupActiveElement)
+    };
 };
 
 
@@ -130,3 +138,6 @@ overlayClosePopup.forEach(function(item) {
 formAddCard.addEventListener('submit', renderCard);
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
+
+
+
