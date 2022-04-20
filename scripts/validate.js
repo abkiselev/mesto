@@ -65,9 +65,11 @@ function hideError(fieldSet, inputField, data){
 
 function toggleButtonState(inputFields, button, data){
   if (hasInvalidInput(inputFields)) {
+    button.setAttribute('disabled', '');
     button.classList.add(data.inactiveButtonClass);
   } 
   else {
+    button.removeAttribute('disabled');
     button.classList.remove(data.inactiveButtonClass);
   };
 };
