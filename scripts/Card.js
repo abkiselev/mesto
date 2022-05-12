@@ -1,31 +1,5 @@
-const initialCards = [
-    {
-      place: 'Архыз',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      place: 'Челябинская область',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      place: 'Иваново',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      place: 'Камчатка',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      place: 'Холмогорский район',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      place: 'Байкал',
-      url: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-]; 
-
-import { openPopup } from './index.js'
+import { initialCards } from './cards.js';
+import { openPopup } from './index.js';
 
 const cardsList = document.querySelector('.cards');
 
@@ -35,12 +9,12 @@ const popupFotoName = popupWithFoto.querySelector('.popup__text');
 
 
 class Card {
-    constructor (card) {
+    constructor(card){
         this._place = card.place;
         this._url = card.url;
     }
 
-    _getTemplate() {
+    _getTemplate(){
         const cardTemplate = document
                             .querySelector('#card-template')
                             .content
@@ -51,11 +25,11 @@ class Card {
     }
 
  
-    _likeCard() {
+    _likeCard(){
         this._element.querySelector('.card__like-button').classList.toggle("card__like-button_active");
     };
 
-    _setListeners() {
+    _setListeners(){
         this._element.querySelector('.card__img').addEventListener('click', () => {
             popupFotoImg.src = this._url;
             popupFotoName.textContent = this._place;
@@ -72,7 +46,7 @@ class Card {
         });
     }
 
-    generateCard() {
+    generateCard(){
         this._element = this._getTemplate();
         this._setListeners();
 
@@ -84,10 +58,10 @@ class Card {
 }
 
 initialCards.forEach(function(card){
-    renderCard (card);
+    renderCard(card);
 });
 
-function renderCard (card) {
+function renderCard(card) {
     const newCard = new Card(card);
     const cardElement = newCard.generateCard();
     cardsList.prepend(cardElement);
