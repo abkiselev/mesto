@@ -1,4 +1,4 @@
-const formsData = {
+export const formsData = {
   inputSelector: '.popup__inputs',
   inputItem: '.popup__input',
   button: '.popup__button',
@@ -6,9 +6,8 @@ const formsData = {
   inputErrorClass: 'popup__input_type_error',
 };
 
-const forms = Array.from(document.querySelectorAll('.popup__form'));
 
-class FormValidator {
+export class FormValidator {
   constructor(formsData, formSelector){
     this._formSelector = formSelector;
     this._inputSelector = formsData.inputSelector;
@@ -29,8 +28,7 @@ class FormValidator {
           this._toggleButtonState(currentForm, inputField);
         });
     });
-
-  };
+  }
 
   _checkInputValidity(currentForm, inputField){
     if (!inputField.validity.valid) {
@@ -39,21 +37,21 @@ class FormValidator {
     else {
       this._hideError(currentForm, inputField);
     };
-  };
+  }
   
   
   _showError(currentForm, inputField, errorMessage){
     const inputError = currentForm.querySelector(`.${inputField.id}-error`);
     inputField.classList.add(this._inputErrorClass);
     inputError.textContent = errorMessage;
-  };
+  }
   
   
   _hideError(currentForm, inputField){
     const inputError = currentForm.querySelector(`.${inputField.id}-error`);
     inputField.classList.remove(this._inputErrorClass);
     inputError.textContent = '';
-  };
+  }
   
   
   _toggleButtonState(currentForm, inputField){
@@ -67,26 +65,19 @@ class FormValidator {
     else {
       button.classList.remove(this._inactiveButtonClass);
     };
-  };
+  }
   
   
   _hasInvalidInput(fieldSet, inputField){
     return fieldSet.some((inputField) => {
       return !inputField.validity.valid;
     }); 
-  };
+  }
 
 
   activateValidation (){
     const currentForm = document.querySelector(`.${this._formSelector}`);
     this._setListeners(currentForm);
     this._toggleButtonState(currentForm);
-
-  };
+  }
 }
-
-
-forms.forEach(function(form){
-  const newForm = new FormValidator(formsData, form.name);
-  newForm.activateValidation();
-});

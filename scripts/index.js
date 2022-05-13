@@ -1,4 +1,6 @@
-import { renderCard } from './Card.js';
+import { initialCards } from './cards.js';
+import { Card } from './Card.js';
+import { FormValidator, formsData } from './FormValidator.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('#edit-profile-popup');
@@ -19,6 +21,24 @@ let popupActiveElement;
 const placeNameInput = formAddCard.querySelector('.popup__input_type_mesto-name');
 const placeUrlInput = formAddCard.querySelector('.popup__input_type_mesto-url');
 
+const cardsList = document.querySelector('.cards');
+const forms = Array.from(document.querySelectorAll('.popup__form'));
+
+
+function renderCard(card) {
+    const newCard = new Card(card, '#card-template');
+    const cardElement = newCard.generateCard();
+    cardsList.prepend(cardElement);
+};
+
+initialCards.forEach(function(card){
+    renderCard(card);
+});
+
+forms.forEach(function(form){
+    const newForm = new FormValidator(formsData, form.name);
+    newForm.activateValidation();
+});
 
 function submitEditProfileForm (evt) {
     evt.preventDefault();
@@ -26,7 +46,7 @@ function submitEditProfileForm (evt) {
     profileJob.textContent = jobInput.value;
 
     closePopup(popupActiveElement);
-}
+};
 
 export function openPopup(popupActiveElement) {
     popupActiveElement.classList.add("popup_active");
@@ -43,7 +63,6 @@ function closePopupOnEscape(event){
         closePopup()
     };
 };
-
 
 
 buttonAddCard.addEventListener('click', function () {
