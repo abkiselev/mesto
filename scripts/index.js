@@ -13,6 +13,7 @@ const profileJob = document.querySelector('.profile__description');
 const buttonAddCard = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('#add-foto-popup');
 const formAddCard = document.querySelector('.add-foto');
+const formAddCardButton = formAddCard.querySelector('.popup__add-button');
 
 const buttonClosePopup = document.querySelectorAll('.popup__close');
 const overlayClosePopup = document.querySelectorAll('.popup__bg');
