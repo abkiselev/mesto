@@ -1,4 +1,4 @@
-import { openPopup } from './utils.js';
+import { openPopup } from './index.js';
 
 export class Card {
   constructor(card, temlateSelector){
@@ -17,16 +17,9 @@ export class Card {
     return cardTemplate;
   }
 
+
   _likeCard(){
     this._element.querySelector('.card__like-button').classList.toggle("card__like-button_active");
-  }
-
-  _removeCard(){
-    this._element.remove();
-  }
-
-  _openPopup(popupWithFoto){
-    openPopup(popupWithFoto);
   }
 
   _setListeners(){
@@ -37,11 +30,11 @@ export class Card {
         popupFotoImg.src = this._url;
         popupFotoName.textContent = this._place;
         popupFotoImg.alt = this._place;
-        this._openPopup(popupWithFoto);
+        openPopup(popupWithFoto);
     });
 
     this._element.querySelector('.card__trash-button').addEventListener('click', () => {
-        this._removeCard();
+        this._element.remove();
     });
 
     this._element.querySelector('.card__like-button').addEventListener('click', () => {
