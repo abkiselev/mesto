@@ -1,4 +1,4 @@
-import { openPopup } from './index.js';
+// import { openPopup } from './index.js';
 
 export class Card {
   constructor(card, temlateSelector){
@@ -24,13 +24,14 @@ export class Card {
 
   _setListeners(){
     this._element.querySelector('.card__img').addEventListener('click', () => {
-        const popupWithFoto = document.querySelector('#foto-popup');
-        const popupFotoImg = popupWithFoto.querySelector('.popup__img');
-        const popupFotoName = popupWithFoto.querySelector('.popup__text');
-        popupFotoImg.src = this._url;
-        popupFotoName.textContent = this._place;
-        popupFotoImg.alt = this._place;
-        openPopup(popupWithFoto);
+        // const popupWithFoto = document.querySelector('#foto-popup');
+        // const popupFotoImg = popupWithFoto.querySelector('.popup__img');
+        // const popupFotoName = popupWithFoto.querySelector('.popup__text');
+        // popupFotoImg.src = this._url;
+        // popupFotoName.textContent = this._place;
+        // popupFotoImg.alt = this._place;
+        // openPopup(popupWithFoto);
+        this.handleCardClick(); 
     });
 
     this._element.querySelector('.card__trash-button').addEventListener('click', () => {
@@ -40,6 +41,10 @@ export class Card {
     this._element.querySelector('.card__like-button').addEventListener('click', () => {
         this._likeCard();
     });
+  }
+
+  handleCardClick(){
+    
   }
 
   generateCard(){

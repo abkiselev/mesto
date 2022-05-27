@@ -11,7 +11,7 @@ export class Section {
         });
     }
 
-    setItem(item){
+    addItem(item){
         this._container.prepend(item)
     }
 }
