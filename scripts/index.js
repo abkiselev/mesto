@@ -1,5 +1,6 @@
 import { initialCards } from './cards.js';
 import { Card } from './Card.js';
+import { Section } from './Section.js';
 import { FormValidator, formsData } from './FormValidator.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -22,19 +23,53 @@ let popupActiveElement;
 const placeNameInput = formAddCard.querySelector('.popup__input_type_mesto-name');
 const placeUrlInput = formAddCard.querySelector('.popup__input_type_mesto-url');
 
-const cardsList = document.querySelector('.cards');
+// const cardsList = document.querySelector('.cards');
 const forms = Array.from(document.querySelectorAll('.popup__form'));
 
 
-function renderCard(card) {
-    const newCard = new Card(card, '#card-template');
-    const cardElement = newCard.generateCard();
-    cardsList.prepend(cardElement);
-};
+// function renderCard(card) {
+//     const newCard = new Card(card, '#card-template');
+//     const cardElement = newCard.generateCard();
+//     cardsList.prepend(cardElement);
+// };
 
-initialCards.forEach(function(card){
-    renderCard(card);
-});
+// initialCards.forEach(function(card){
+//     renderCard(card);
+// });
+
+
+
+// инициализация section 
+const cardsList = new Section(
+    {
+        data: initialCards,
+        renderer: (card) => {
+            const newCard = new Card(card, '#card-template');
+            const cardElement = newCard.generateCard();
+            cardsList.setItem(cardElement);
+        }
+    },
+
+    '.cards'    
+)
+cardsList.renderItems();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 forms.forEach(function(form){
     const newForm = new FormValidator(formsData, form.name);
