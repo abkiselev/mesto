@@ -1,5 +1,3 @@
-// import { openPopup } from './index.js';
-
 export class Card {
   constructor({ card, temlateSelector, handleCardClick }){
       this._place = card.place;
@@ -25,14 +23,6 @@ export class Card {
 
   _setListeners(){
     this._element.querySelector('.card__img').addEventListener('click', () => {
-        // const popupWithFoto = document.querySelector('#foto-popup');
-        // const popupFotoImg = popupWithFoto.querySelector('.popup__img');
-        // const popupFotoName = popupWithFoto.querySelector('.popup__text');
-        // popupFotoImg.src = this._url;
-        // popupFotoName.textContent = this._place;
-        // popupFotoImg.alt = this._place;
-        // openPopup(popupWithFoto);
-        // console.log(this._handleCardClick)
         this._handleCardClick(this._place, this._url); 
     });
 
@@ -44,10 +34,6 @@ export class Card {
         this._likeCard();
     });
   }
-
-  // handleCardClick(){
-  //   this.open()
-  // }
 
   generateCard(){
     this._element = this._getTemplate();

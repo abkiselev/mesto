@@ -1,10 +1,12 @@
-import { initialCards } from './cards.js';
-import { Card } from './Card.js';
-import { Section } from './Section.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { UserInfo } from './UserInfo.js';
-import { FormValidator, formsData } from './FormValidator.js';
+import '../pages/index.css';
+
+import { initialCards } from '../components/cards.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { FormValidator, formsData } from '../components/FormValidator.js';
 
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -34,8 +36,6 @@ const cardsList = new Section(
             const cardElement = newCard.generateCard();
             cardsList.addItem(cardElement);
         },
-
-        
     },
 
     '.cards'    
@@ -78,6 +78,7 @@ const popupEditProfile = new PopupWithForm(
         profileInfo.setUserInfo(values)
     }
 );
+popupEditProfile.setEventListeners();
 
 
 
