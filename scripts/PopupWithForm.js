@@ -13,35 +13,18 @@ export class PopupWithForm extends Popup {
         this._inputs.forEach(item => {
             inputValues.push(item.value)
         });
-        console.log(inputValues)
+        
         return inputValues
     }
 
-    // _handleEscClose(event){
-    //     if (event.key === 'Escape'){
-    //         this.close();
-    //     };
-    // }
-
     setEventListeners(){
-        
         super.setEventListeners();
+
         this._form.addEventListener('submit', (evt) => {  
             evt.preventDefault();   
             this._formHandler(this._getInputValues());
+            
             this.close();
         });
     }
-
-    // open(){
-    //     this.setEventListeners();      
-    //     this._popup.classList.add("popup_active");       
-    // }
-
-    close(){   
-        this._form.reset();     
-        // super.close();
-        
-    }
-
 }

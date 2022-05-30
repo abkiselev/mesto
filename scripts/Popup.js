@@ -23,7 +23,7 @@ export class Popup {
     }
 
     open(){
-        this.setEventListeners();      
+        // this.setEventListeners();      
         this._popup.classList.add("popup_active");       
     }
 

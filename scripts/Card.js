@@ -1,10 +1,11 @@
 // import { openPopup } from './index.js';
 
 export class Card {
-  constructor(card, temlateSelector){
+  constructor({ card, temlateSelector, handleCardClick }){
       this._place = card.place;
       this._url = card.url;
       this._template = temlateSelector;
+      this._handleCardClick = handleCardClick;
   }
 
   _getTemplate(){
@@ -31,7 +32,8 @@ export class Card {
         // popupFotoName.textContent = this._place;
         // popupFotoImg.alt = this._place;
         // openPopup(popupWithFoto);
-        this.handleCardClick(); 
+        // console.log(this._handleCardClick)
+        this._handleCardClick(this._place, this._url); 
     });
 
     this._element.querySelector('.card__trash-button').addEventListener('click', () => {
@@ -43,9 +45,9 @@ export class Card {
     });
   }
 
-  handleCardClick(){
-    
-  }
+  // handleCardClick(){
+  //   this.open()
+  // }
 
   generateCard(){
     this._element = this._getTemplate();
