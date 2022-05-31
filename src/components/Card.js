@@ -16,6 +16,9 @@ export class Card {
     return cardTemplate;
   }
 
+  _remove(){
+    this._element.remove();
+  }
 
   _likeCard(){
     this._element.querySelector('.card__like-button').classList.toggle("card__like-button_active");
@@ -27,7 +30,7 @@ export class Card {
     });
 
     this._element.querySelector('.card__trash-button').addEventListener('click', () => {
-        this._element.remove();
+        this._remove();
     });
 
     this._element.querySelector('.card__like-button').addEventListener('click', () => {

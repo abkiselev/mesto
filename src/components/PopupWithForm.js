@@ -9,12 +9,18 @@ export class PopupWithForm extends Popup {
     }
 
     _getInputValues(){
-        const inputValues = [];
-        this._inputs.forEach(item => {
-            inputValues.push(item.value)
-        });
+        const inputValues = {};
+        inputValues.name = this._inputs[0].value;
+        inputValues.info =  this._inputs[1].value;
         
         return inputValues
+    }
+
+    close(){
+        super.close();
+        this._form.reset();
+        this._form.querySelector('.popup__button').classList.add('popup__button_disabled');
+        this._form.querySelector('.popup__button').setAttribute('disabled', true);
     }
 
     setEventListeners(){
@@ -23,8 +29,6 @@ export class PopupWithForm extends Popup {
         this._form.addEventListener('submit', (evt) => {  
             evt.preventDefault();   
             this._formHandler(this._getInputValues());
-            
-            this.close();
         });
     }
 }
