@@ -18,6 +18,7 @@ export class Card {
 
   _remove(){
     this._element.remove();
+    this._element = null;
   }
 
   _likeCard(){
