@@ -7,7 +7,9 @@ import {
         buttonAddCard, 
         forms, 
         formEditProfile,
-        } from '../components/constants.js';
+        formAddCard,
+        formsData,
+        } from '../utils/constants.js';
 
 import { initialCards } from '../utils/cards.js';
 import { Card } from '../components/Card.js';
@@ -16,7 +18,6 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { formsData } from '../utils/constants.js';
 
 
 
@@ -63,6 +64,12 @@ popupEditProfile.setEventListeners();
 
 const imagePopup = new PopupWithImage('#foto-popup');
 
+const formCard = new FormValidator(formsData, 'add-card');
+formCard.activateValidation();
+
+const formProfile = new FormValidator(formsData, 'edit-profile');
+formProfile.activateValidation();
+
 
 function createCard(data){
 
@@ -81,29 +88,28 @@ function createCard(data){
 };
 
 
-
-forms.forEach(function(form){
-    const newForm = new FormValidator(formsData, form.name);
-    newForm.activateValidation();
-});
-
-
 buttonAddCard.addEventListener('click', function () {
-    popupAddCard.open()
+    formAddCard.querySelectorAll('.popup__input').forEach((field) => {
+        formCard.hideError(field)
+    });
+
+    formCard.disableSubmitButton();
+
+    popupAddCard.open();
 });
+
 
 buttonEditProfile.addEventListener('click', function () {
-
+    
     formEditProfile.querySelectorAll('.popup__input').forEach((field) => {
-        field.classList.remove('popup__input_type_error');
-    })
-    
-    formEditProfile.querySelectorAll('.popup__error').forEach((field) => {
-        field.textContent = ''
-    })
-    
+        formProfile.hideError(field)
+    });
+
+    formProfile.disableSubmitButton();
+
     nameInput.value = profileInfo.getUserInfo().name;
     jobInput.value = profileInfo.getUserInfo().info;
-    popupEditProfile.open()
+
+    popupEditProfile.open();
 });
 
