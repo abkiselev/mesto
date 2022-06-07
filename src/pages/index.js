@@ -1,5 +1,6 @@
 import '../pages/index.css';
 
+import { Api } from '../components/Api.js';
 import {
         buttonEditProfile, 
         nameInput, 
@@ -13,7 +14,7 @@ import {
         formEditAvatar,
         } from '../utils/constants.js';
 
-import { initialCards } from '../utils/cards.js';
+// import { initialCards } from '../utils/cards.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -23,47 +24,113 @@ import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/FormValidator.js';
 
 
-
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-43',
+    headers: {
+      authorization: 'a8aa5636-0a20-425d-9a78-90b6247fe762',
+      'Content-Type': 'application/json'
+    }
+});
 
 const cardsList = new Section(
     {
-        data: initialCards,        
+        // data: initialCards,        
         renderer: (card) => {            
             cardsList.addItem(createCard(card));
         },
     },
 
     '.cards'    
-)
-cardsList.renderItems();
+);
+
+const initialCards = new Promise((resolve, reject) => {
+    return resolve(api.getInitialCards())
+})
+
+initialCards.then((cards) => {
+    // cardsList.data = cards;
+    cardsList.renderItems(cards);
+})
+
+// cardsList.renderItems();
+
+
+
+const profileInfo = new Promise((resolve, reject) => {
+    return resolve(api.getProfileInfo())
+})
+
+profileInfo.then((info) => {
+    profileInfo2.setUserInfo(info)
+    profileInfo2.setUserAvatar(info)
+})
+
+const profileInfo2 = new UserInfo(
+    {
+        nameSelector: '.profile__name',
+        infoSelector: '.profile__description',
+        avatarSelector: '.profile__img'
+    }
+);
+
+const popupEditProfile = new PopupWithForm(
+    '#edit-profile-popup',
+    ({name, info}) => {
+        api.changeProfileInfo({name, about: info})
+        profileInfo2.setUserInfo({name, about: info});
+        popupEditProfile.close();
+    }
+);
+popupEditProfile.setEventListeners();
+
+
+
+
+const popupEditAvatar = new PopupWithForm(
+    '#edit-avatar-popup',
+    ({name}) => {
+        profileInfo2.setUserAvatar({avatar: name});
+        api.changeProfileAvatar({avatar: name});
+        popupEditAvatar.close();
+    }
+);
+popupEditAvatar.setEventListeners();
+
+
+
+
+
+
+// console.log(api.getProfileInfo())
+
+// const cardsList = new Section(
+//     {
+//         data: initialCards,        
+//         renderer: (card) => {            
+//             cardsList.addItem(createCard(card));
+//         },
+//     },
+
+//     '.cards'    
+// )
+// cardsList.renderItems();
 
 
 const popupAddCard = new PopupWithForm(
     '#add-foto-popup',
-    (data) => {
-        cardsList.addItem(createCard({place: data.name, url: data.info}));
+    ({name, info}) => {
+        api.createNewCard({name, link: info})
+        cardsList.addItem(createCard({name, link: info}));
         popupAddCard.close();
     }
 );
 popupAddCard.setEventListeners();
 
 
-const profileInfo = new UserInfo(
-    {
-        nameSelector: '.profile__name',
-        infoSelector: '.profile__description'
-    }
-);
 
 
-const popupEditProfile = new PopupWithForm(
-    '#edit-profile-popup',
-    ({name, info}) => {
-        profileInfo.setUserInfo({name, info});
-        popupEditProfile.close();
-    }
-);
-popupEditProfile.setEventListeners();
+
+
 
 const imagePopup = new PopupWithImage('#foto-popup');
 
@@ -76,14 +143,7 @@ formProfile.activateValidation();
 const formAvatar = new FormValidator(formsData, 'edit-avatar');
 formAvatar.activateValidation();
 
-const popupEditAvatar = new PopupWithForm(
-    '#edit-avatar-popup',
-    (data) => {
-        // cardsList.addItem(createCard({place: data.name, url: data.info}));
-        popupEditAvatar.close();
-    }
-);
-popupEditAvatar.setEventListeners();
+
 
 
 // const popupDeleteCard = new PopupDeleteCard(
@@ -103,8 +163,11 @@ function createCard(data){
         {
             card: data, 
             temlateSelector: '#card-template', 
-            handleCardClick: (place = data.name, url = data.info) => {
+            handleCardClick: (name = data.name, link = data.info) => {
                 imagePopup.open(place, url)
+            },
+            handleCardLike: (id) => {
+                api.setCardLike(id)
             }
         }
     );
@@ -135,8 +198,8 @@ buttonEditProfile.addEventListener('click', function () {
 
     formProfile.disableSubmitButton();
 
-    nameInput.value = profileInfo.getUserInfo().name;
-    jobInput.value = profileInfo.getUserInfo().info;
+    nameInput.value = profileInfo2.getUserInfo().name;
+    jobInput.value = profileInfo2.getUserInfo().info;
 
     popupEditProfile.open();
 });
