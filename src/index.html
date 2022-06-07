@@ -15,7 +15,10 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__card">
-                    <img class="profile__img" src="<%=require('./images/profile_img.jpg')%>" alt="Фото">
+                    <div class="profile__avatar">               
+                        <img class="profile__img" src="<%=require('./images/profile_img.jpg')%>" alt="Фото">       
+                    </div>
+                    
                         <div class="profile__info">
                             <div class="profile__title">
                                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -122,12 +125,55 @@
         <div class="popup__bg"></div>
     </section>
 
+    <section id="delete-card-popup" class="popup popup_type_delete-card">
+        <div class="popup__container">
+            <h2 class="popup__title">
+                Вы уверены?
+            </h2>
+            <!-- <form name="delete-card" class="delete-card popup__form" novalidate></form> -->
+                <button type="submit" class="popup__button popup__delete-card-button">Да</button>
+            <!-- </form> -->
+            <button class="popup__close" type="button"></button>
+        </div>
+        <div class="popup__bg"></div>
+    </section>
+
+    <section id="edit-avatar-popup" class="popup popup_type_edit-avatar">
+        <div class="popup__container">
+            <h2 class="popup__title">
+                Обновить аватар
+            </h2>
+            <form name="add-card" class="edit-avatar popup__form" novalidate>
+                <fieldset class="popup__inputs">
+                    
+                    <input 
+                    id="edit-foto-url"
+                    class="popup__input popup__input_type_mesto-url" 
+                    type="url" 
+                    value="" 
+                    placeholder="Ссылка на картинку" 
+                    novalidate
+                    required
+                    >
+                    <span class="popup__error edit-foto-url-error"></span>
+                </fieldset>
+                <button type="submit" class="popup__button popup__add-button">Сохранить</button>
+            </form>
+            <button class="popup__close" type="button"></button>
+        </div>
+        <div class="popup__bg"></div>
+    </section>
+
     <template id="card-template">
         <li class="card">
             <img class="card__img" src="#" alt="Фото">
             <div class="card__heading">
                 <h2 class="card__title"></h2>
-                <button class="card__like-button" type="button"></button>
+                <div>
+                    <button class="card__like-button" type="button"></button>
+                    <p class="card__like-counter">0</p>
+                </div>
+                
             </div>
             <button class="card__trash-button" type="button"></button>
         </li>

@@ -39,6 +39,10 @@ export class Card {
     });
   }
 
+  remove(){
+    this._remove();
+  }
+
   generateCard(){
     this._element = this._getTemplate();
     this._setListeners();

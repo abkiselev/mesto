@@ -7,8 +7,10 @@ import {
         buttonAddCard, 
         forms, 
         formEditProfile,
+        buttonEditAvatar,
         formAddCard,
         formsData,
+        formEditAvatar,
         } from '../utils/constants.js';
 
 import { initialCards } from '../utils/cards.js';
@@ -16,6 +18,7 @@ import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupDeleteCard } from '../components/PopupDeleteCard.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/FormValidator.js';
 
@@ -70,6 +73,29 @@ formCard.activateValidation();
 const formProfile = new FormValidator(formsData, 'edit-profile');
 formProfile.activateValidation();
 
+const formAvatar = new FormValidator(formsData, 'edit-avatar');
+formAvatar.activateValidation();
+
+const popupEditAvatar = new PopupWithForm(
+    '#edit-avatar-popup',
+    (data) => {
+        // cardsList.addItem(createCard({place: data.name, url: data.info}));
+        popupEditAvatar.close();
+    }
+);
+popupEditAvatar.setEventListeners();
+
+
+// const popupDeleteCard = new PopupDeleteCard(
+//     '#delete-card-popup',
+//     (data) => {
+//         // cardsList.addItem(createCard({place: data.name, url: data.info}));
+//         data.remove()
+//         popupDeleteCard.close();
+//     }
+// );
+// popupDeleteCard.setEventListeners();
+
 
 function createCard(data){
 
@@ -86,6 +112,8 @@ function createCard(data){
     const cardElement = newCard.generateCard();
     return cardElement;
 };
+
+
 
 
 buttonAddCard.addEventListener('click', function () {
@@ -113,3 +141,11 @@ buttonEditProfile.addEventListener('click', function () {
     popupEditProfile.open();
 });
 
+
+buttonEditAvatar.addEventListener('click', function () {
+    formAvatar.hideError(formEditAvatar.querySelector('.popup__input'))
+
+    formAvatar.disableSubmitButton();
+
+    popupEditAvatar.open();
+});
