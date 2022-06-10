@@ -29,7 +29,21 @@ export class Api {
         link
       })
     })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Ошибка: ${res.status}`);
+    })
 
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization,
+      }
+    })
   }
 
 
@@ -59,6 +73,11 @@ export class Api {
         about
       })
     })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Ошибка: ${res.status}`);
+    })
 
   }
 
@@ -72,6 +91,11 @@ export class Api {
       body: JSON.stringify({
         avatar
       })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Ошибка: ${res.status}`);
     })
 
   }

@@ -19,6 +19,15 @@ export class PopupWithForm extends Popup {
         return inputValues
     }
 
+    toggleButtonText(){
+        if(this._button.textContent === 'Сохранить'){
+            this._button.textContent = 'Сохранение...';
+        }
+        else if(this._button.textContent === 'Сохранение...'){
+            this._button.textContent = 'Сохранить';
+        }
+    }
+
     close(){
         super.close();
         this._form.reset();
@@ -29,9 +38,8 @@ export class PopupWithForm extends Popup {
 
         this._form.addEventListener('submit', (evt) => {  
             evt.preventDefault();   
-            this._button.textContent = 'Сохранение...';
+            this.toggleButtonText();
             this._formHandler(this._getInputValues());
-            this._button.textContent = 'Сохранить';
         });
     }
 }

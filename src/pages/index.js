@@ -35,37 +35,37 @@ const api = new Api({
 const cardsList = new Section(
     {
         // data: initialCards,        
-        renderer: (card) => {            
-            cardsList.addItem(createCard(card));
+        renderer: (card, userId) => {            
+            cardsList.addItem(createCard(card, userId));
         },
     },
 
     '.cards'    
 );
 
-const initialCards = new Promise((resolve, reject) => {
-    return resolve(api.getInitialCards())
-})
+// api.getInitialCards()    
+//     .then((cards) => {
+//         return cards;
+//     })
+//     .then((cards) => {
+//         api.getProfileInfo();
+//     })
+//     .then((cards) => {
+//         cardsList.renderItems(cards.reverse());
+//     })
 
-initialCards.then((cards) => {
-    // cardsList.data = cards;
-    cardsList.renderItems(cards);
-})
+Promise.all([api.getInitialCards(), api.getProfileInfo()])
+    .then((res) => {
+        console.log(res);
+        profileInfo.setUserInfo(res[1]);
+        profileInfo.setUserAvatar(res[1]);
+        profileInfo.getUserId(res[1]);
 
-// cardsList.renderItems();
+        cardsList.renderItems(res[0].reverse(), res[1]._id);
+    })
 
 
-
-const profileInfo = new Promise((resolve, reject) => {
-    return resolve(api.getProfileInfo())
-})
-
-profileInfo.then((info) => {
-    profileInfo2.setUserInfo(info)
-    profileInfo2.setUserAvatar(info)
-})
-
-const profileInfo2 = new UserInfo(
+const profileInfo = new UserInfo(
     {
         nameSelector: '.profile__name',
         infoSelector: '.profile__description',
@@ -73,12 +73,25 @@ const profileInfo2 = new UserInfo(
     }
 );
 
+// api.getProfileInfo()
+//     .then((res) =>{
+//         profileInfo.setUserInfo(res);
+//         profileInfo.setUserAvatar(res);
+//         profileInfo.getUserId(res);
+//     })
+
+
 const popupEditProfile = new PopupWithForm(
     '#edit-profile-popup',
     ({name, info}) => {
         api.changeProfileInfo({name, about: info})
-        profileInfo2.setUserInfo({name, about: info});
+            .then((res) => {
+                profileInfo.setUserInfo(res);
+                popupEditProfile.toggleButtonText();
+            })
+        
         popupEditProfile.close();
+        
     }
 );
 popupEditProfile.setEventListeners();
@@ -89,8 +102,12 @@ popupEditProfile.setEventListeners();
 const popupEditAvatar = new PopupWithForm(
     '#edit-avatar-popup',
     ({name}) => {
-        profileInfo2.setUserAvatar({avatar: name});
-        api.changeProfileAvatar({avatar: name});
+        api.changeProfileAvatar({avatar: name})
+        .then((res) => {
+            profileInfo.setUserAvatar(res);
+            popupEditAvatar.toggleButtonText();
+        })
+
         popupEditAvatar.close();
     }
 );
@@ -120,8 +137,13 @@ const popupAddCard = new PopupWithForm(
     '#add-foto-popup',
     ({name, info}) => {
         api.createNewCard({name, link: info})
-        cardsList.addItem(createCard({name, link: info}));
+            .then((res) => {
+                cardsList.addItem(createCard(res, profileInfo.userId));
+                
+            })
+            
         popupAddCard.close();
+        
     }
 );
 popupAddCard.setEventListeners();
@@ -146,32 +168,40 @@ formAvatar.activateValidation();
 
 
 
-// const popupDeleteCard = new PopupDeleteCard(
-//     '#delete-card-popup',
-//     (data) => {
-//         // cardsList.addItem(createCard({place: data.name, url: data.info}));
-//         data.remove()
-//         popupDeleteCard.close();
-//     }
-// );
-// popupDeleteCard.setEventListeners();
+const popupDeleteCard = new PopupDeleteCard(
+    '#delete-card-popup',
+    (newCard) => {
+        api.deleteCard(newCard._id)
+            .then(() => {
+                newCard.remove();
+                popupDeleteCard.toggleButtonText();
+            })
+
+        popupDeleteCard.close();
+    }
+);
+popupDeleteCard.setEventListeners();
 
 
-function createCard(data){
+function createCard(data, userId){
 
     const newCard = new Card(
         {
             card: data, 
+            userId: userId,
             temlateSelector: '#card-template', 
-            handleCardClick: (name = data.name, link = data.info) => {
-                imagePopup.open(place, url)
+            handleCardClick: (name, link) => {
+                imagePopup.open(name, link)
             },
             handleCardLike: (id) => {
                 api.setCardLike(id)
-            }
+            },
+            handleCardDelete: (newCard) => {
+                popupDeleteCard.open(newCard)
+            },
         }
     );
-
+        // console.log(newCard)
     const cardElement = newCard.generateCard();
     return cardElement;
 };
@@ -198,8 +228,8 @@ buttonEditProfile.addEventListener('click', function () {
 
     formProfile.disableSubmitButton();
 
-    nameInput.value = profileInfo2.getUserInfo().name;
-    jobInput.value = profileInfo2.getUserInfo().info;
+    nameInput.value = profileInfo.getUserInfo().name;
+    jobInput.value = profileInfo.getUserInfo().info;
 
     popupEditProfile.open();
 });

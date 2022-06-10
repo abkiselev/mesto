@@ -5,13 +5,14 @@ export class Section {
         this._container = document.querySelector(containerSelector);
     }
 
-    renderItems(cards){
+    renderItems(cards, userId){
         cards.forEach(item => {
-            this._renderer(item)
+            this._renderer(item, userId)
         });
     }
 
     addItem(item){
-        this._container.append(item)
+        // console.log(item)
+        this._container.prepend(item)
     }
 }
