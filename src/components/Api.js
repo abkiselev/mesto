@@ -101,12 +101,10 @@ export class Api {
   }
 
   setCardLike(cardId, method) {
-    console.log(method)
     return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: method,
       headers: {
         authorization: this._authorization,
-        // 'Content-Type': 'application/json'
       }
     })
     .then(res => {
@@ -114,6 +112,7 @@ export class Api {
         return res.json();
       } return Promise.reject(`Ошибка: ${res.status}`);
     })
+    
   }
 
 

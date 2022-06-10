@@ -19,13 +19,8 @@ export class PopupWithForm extends Popup {
         return inputValues
     }
 
-    toggleButtonText(){
-        if(this._button.textContent === 'Сохранить'){
-            this._button.textContent = 'Сохранение...';
-        }
-        else if(this._button.textContent === 'Сохранение...'){
-            this._button.textContent = 'Сохранить';
-        }
+    toggleButtonText(text){
+        this._button.textContent = text;
     }
 
     close(){
@@ -38,7 +33,7 @@ export class PopupWithForm extends Popup {
 
         this._form.addEventListener('submit', (evt) => {  
             evt.preventDefault();   
-            this.toggleButtonText();
+            this.toggleButtonText('Сохранение...');
             this._formHandler(this._getInputValues());
         });
     }

@@ -14,7 +14,6 @@ import {
         formEditAvatar,
         } from '../utils/constants.js';
 
-// import { initialCards } from '../utils/cards.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -34,7 +33,6 @@ const api = new Api({
 
 const cardsList = new Section(
     {
-        // data: initialCards,        
         renderer: (card, userId) => {            
             cardsList.addItem(createCard(card, userId));
         },
@@ -43,26 +41,16 @@ const cardsList = new Section(
     '.cards'    
 );
 
-// api.getInitialCards()    
-//     .then((cards) => {
-//         return cards;
-//     })
-//     .then((cards) => {
-//         api.getProfileInfo();
-//     })
-//     .then((cards) => {
-//         cardsList.renderItems(cards.reverse());
-//     })
 
 Promise.all([api.getInitialCards(), api.getProfileInfo()])
     .then((res) => {
-        console.log(res);
         profileInfo.setUserInfo(res[1]);
         profileInfo.setUserAvatar(res[1]);
         profileInfo.getUserId(res[1]);
 
         cardsList.renderItems(res[0].reverse(), res[1]._id);
     })
+    .catch(err => console.log(err));
 
 
 const profileInfo = new UserInfo(
@@ -73,13 +61,6 @@ const profileInfo = new UserInfo(
     }
 );
 
-// api.getProfileInfo()
-//     .then((res) =>{
-//         profileInfo.setUserInfo(res);
-//         profileInfo.setUserAvatar(res);
-//         profileInfo.getUserId(res);
-//     })
-
 
 const popupEditProfile = new PopupWithForm(
     '#edit-profile-popup',
@@ -87,8 +68,9 @@ const popupEditProfile = new PopupWithForm(
         api.changeProfileInfo({name, about: info})
             .then((res) => {
                 profileInfo.setUserInfo(res);
-                popupEditProfile.toggleButtonText();
+                popupEditProfile.toggleButtonText('Сохранить');
             })
+            .catch(err => console.log(err));
         
         popupEditProfile.close();
         
@@ -105,8 +87,9 @@ const popupEditAvatar = new PopupWithForm(
         api.changeProfileAvatar({avatar: name})
         .then((res) => {
             profileInfo.setUserAvatar(res);
-            popupEditAvatar.toggleButtonText();
+            popupEditAvatar.toggleButtonText('Сохранить');
         })
+        .catch(err => console.log(err));
 
         popupEditAvatar.close();
     }
@@ -115,42 +98,21 @@ popupEditAvatar.setEventListeners();
 
 
 
-
-
-
-// console.log(api.getProfileInfo())
-
-// const cardsList = new Section(
-//     {
-//         data: initialCards,        
-//         renderer: (card) => {            
-//             cardsList.addItem(createCard(card));
-//         },
-//     },
-
-//     '.cards'    
-// )
-// cardsList.renderItems();
-
-
 const popupAddCard = new PopupWithForm(
     '#add-foto-popup',
     ({name, info}) => {
         api.createNewCard({name, link: info})
             .then((res) => {
                 cardsList.addItem(createCard(res, profileInfo.userId));
-                
+                popupAddCard.toggleButtonText('Создать');
             })
+            .catch(err => console.log(err));
             
         popupAddCard.close();
         
     }
 );
 popupAddCard.setEventListeners();
-
-
-
-
 
 
 
@@ -174,8 +136,9 @@ const popupDeleteCard = new PopupDeleteCard(
         api.deleteCard(newCard._id)
             .then(() => {
                 newCard.remove();
-                popupDeleteCard.toggleButtonText();
+                popupDeleteCard.toggleButtonText('Да');
             })
+            .catch(err => console.log(err));
 
         popupDeleteCard.close();
     }
@@ -196,24 +159,17 @@ function createCard(data, userId){
             handleCardLike: (id, method) => {
                 api.setCardLike(id, method)
                     .then((res) => {
-                        console.log(res.likes)
-                        // Promise.all([newCard.toggleLikeButton(), newCard.setLikeCounter()])
-                        //     .then(res => {
-                        //         console.log(res)
-                        //         newCard.toggleLikeButton()
-                        //         newCard.setLikeCounter()
-                        //     })
-                        // newCard.toggleLikeButton()
                         newCard.setLikeCounter(res)
                     })
+                    .catch(err => console.log(err));
             },
             handleCardDelete: (newCard) => {
                 popupDeleteCard.open(newCard)
             },
         }
     );
-        // console.log(newCard)
-    const cardElement = newCard.generateCard();
+    const cardElement = newCard.generateCard(data);
+    
     return cardElement;
 };
 

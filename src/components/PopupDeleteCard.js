@@ -4,8 +4,6 @@ export class PopupDeleteCard extends Popup {
     constructor(popupSelector, handleFormSubmit){
         super(popupSelector);
         this._button = this._popup.querySelector('.popup__button');
-        // this._id = cardId;
-        // this._inputs = this._form.querySelectorAll('.popup__input');
         this._formHandler = handleFormSubmit;
     }
 
@@ -33,14 +31,4 @@ export class PopupDeleteCard extends Popup {
         super.open();
     }
 
-    // close(){
-    //     super.close();
-    //     this._form.reset();
-    // }
-
-    // setEventListeners(){
-    //     super.setEventListeners();
-
-        
-    // }
 }

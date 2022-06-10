@@ -35,7 +35,6 @@ export class Card {
   }
 
   _checkLikeStatus(){
-    
     return this._likesList.some(item => item._id === this._userId);
   }
 
@@ -44,22 +43,19 @@ export class Card {
   }
 
   setLikeCounter(data){
-    this._likesList = data;
-    this._likesCounter = data.length;
+    this._likesList = data.likes;
+    this._likesCounter = data.likes.length;
     this._element.querySelector('.card__like-counter').textContent = this._likesCounter;
-    console.log(this._likesList)
   }
 
   _likeCard(){
-    console.log(this._checkLikeStatus())
-
     if(!this._checkLikeStatus()){
-      console.log('был лайкнут')
       this._handleCardLike(this._id, 'PUT');
+      this.toggleLikeButton();
     } 
     else if (this._checkLikeStatus()){
-      console.log('не был лайкнут')
       this._handleCardLike(this._id, 'DELETE');
+      this.toggleLikeButton();
     }
     
   }
@@ -86,10 +82,10 @@ export class Card {
     this._remove();
   }
 
-  generateCard(){
+  generateCard(data){
     this._element = this._getTemplate();    
 
-    this.setLikeCounter(this._likesList)
+    this.setLikeCounter(data)
     this._element.querySelector('.card__img').src = this._url;
     this._element.querySelector('.card__title').textContent = this._place;
     
