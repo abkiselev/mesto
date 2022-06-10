@@ -193,8 +193,19 @@ function createCard(data, userId){
             handleCardClick: (name, link) => {
                 imagePopup.open(name, link)
             },
-            handleCardLike: (id) => {
-                api.setCardLike(id)
+            handleCardLike: (id, method) => {
+                api.setCardLike(id, method)
+                    .then((res) => {
+                        console.log(res.likes)
+                        // Promise.all([newCard.toggleLikeButton(), newCard.setLikeCounter()])
+                        //     .then(res => {
+                        //         console.log(res)
+                        //         newCard.toggleLikeButton()
+                        //         newCard.setLikeCounter()
+                        //     })
+                        // newCard.toggleLikeButton()
+                        newCard.setLikeCounter(res)
+                    })
             },
             handleCardDelete: (newCard) => {
                 popupDeleteCard.open(newCard)

@@ -100,13 +100,19 @@ export class Api {
 
   }
 
-  setCardLike(cardId) {
+  setCardLike(cardId, method) {
+    console.log(method)
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'PUT',
+      method: method,
       headers: {
         authorization: this._authorization,
-        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/json'
       }
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } return Promise.reject(`Ошибка: ${res.status}`);
     })
   }
 
