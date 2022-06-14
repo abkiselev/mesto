@@ -43,12 +43,10 @@ const cardsList = new Section(
 
 
 Promise.all([api.getInitialCards(), api.getProfileInfo()])
-    .then((res) => {
-        profileInfo.setUserInfo(res[1]);
-        profileInfo.setUserAvatar(res[1]);
-        profileInfo.getUserId(res[1]);
+    .then(([initialCards, info]) => {
+        profileInfo.setUserInfo(info);
 
-        cardsList.renderItems(res[0].reverse(), res[1]._id);
+        cardsList.renderItems(initialCards.reverse(), info._id);
     })
     .catch(err => console.log(err));
 
@@ -67,13 +65,13 @@ const popupEditProfile = new PopupWithForm(
     ({name, info}) => {
         api.changeProfileInfo({name, about: info})
             .then((res) => {
-                profileInfo.setUserInfo(res);
+                profileInfo.setUserInfo(res);                
+                popupEditProfile.close();
                 popupEditProfile.toggleButtonText('Сохранить');
             })
-            .catch(err => console.log(err));
-        
-        popupEditProfile.close();
-        
+            .catch(err => {
+                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
+            });
     }
 );
 popupEditProfile.setEventListeners();
@@ -86,12 +84,13 @@ const popupEditAvatar = new PopupWithForm(
     ({name}) => {
         api.changeProfileAvatar({avatar: name})
         .then((res) => {
-            profileInfo.setUserAvatar(res);
+            profileInfo.setUserInfo(res);
+            popupEditAvatar.close();
             popupEditAvatar.toggleButtonText('Сохранить');
         })
-        .catch(err => console.log(err));
-
-        popupEditAvatar.close();
+        .catch(err => {
+            popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
+        });
     }
 );
 popupEditAvatar.setEventListeners();
@@ -104,12 +103,12 @@ const popupAddCard = new PopupWithForm(
         api.createNewCard({name, link: info})
             .then((res) => {
                 cardsList.addItem(createCard(res, profileInfo.userId));
+                popupAddCard.close();
                 popupAddCard.toggleButtonText('Создать');
             })
-            .catch(err => console.log(err));
-            
-        popupAddCard.close();
-        
+            .catch(err => {
+                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
+            });
     }
 );
 popupAddCard.setEventListeners();
@@ -117,6 +116,7 @@ popupAddCard.setEventListeners();
 
 
 const imagePopup = new PopupWithImage('#foto-popup');
+imagePopup.setEventListeners();   
 
 const formCard = new FormValidator(formsData, 'add-card');
 formCard.activateValidation();
@@ -136,11 +136,12 @@ const popupDeleteCard = new PopupDeleteCard(
         api.deleteCard(newCard._id)
             .then(() => {
                 newCard.remove();
+                popupDeleteCard.close();
                 popupDeleteCard.toggleButtonText('Да');
             })
-            .catch(err => console.log(err));
-
-        popupDeleteCard.close();
+            .catch(err => {
+                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
+            });
     }
 );
 popupDeleteCard.setEventListeners();
@@ -177,35 +178,26 @@ function createCard(data, userId){
 
 
 buttonAddCard.addEventListener('click', function () {
-    formAddCard.querySelectorAll('.popup__input').forEach((field) => {
-        formCard.hideError(field)
-    });
-
-    formCard.disableSubmitButton();
+    formCard.resetValidation();
 
     popupAddCard.open();
 });
 
 
 buttonEditProfile.addEventListener('click', function () {
-    
-    formEditProfile.querySelectorAll('.popup__input').forEach((field) => {
-        formProfile.hideError(field)
-    });
+    formProfile.resetValidation();
 
-    formProfile.disableSubmitButton();
+    const { name, info } = profileInfo.getUserInfo();
 
-    nameInput.value = profileInfo.getUserInfo().name;
-    jobInput.value = profileInfo.getUserInfo().info;
+    nameInput.value = name;
+    jobInput.value = info;
 
     popupEditProfile.open();
 });
 
 
 buttonEditAvatar.addEventListener('click', function () {
-    formAvatar.hideError(formEditAvatar.querySelector('.popup__input'))
-
-    formAvatar.disableSubmitButton();
+    formAvatar.resetValidation();
 
     popupEditAvatar.open();
 });

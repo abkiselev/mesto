@@ -1,9 +1,5 @@
-import formsData from '../utils/constants.js';
-
-
 export class FormValidator {
   constructor(formsData, formSelector){
-    this._formSelector = formSelector;
     this._inputSelector = formsData.inputSelector;
     this._inputItem = formsData.inputItem;
     this._button = formsData.button; 
@@ -14,12 +10,8 @@ export class FormValidator {
     this._button = this._currentForm.querySelector(formsData.button);
   }
 
-  _setListeners(){
-    this._currentForm.addEventListener('submit', function(event){
-      event.preventDefault();
-    });
-        
-    this._currentForm.querySelectorAll(this._inputItem).forEach((inputField) => {
+  _setListeners(){        
+    this._fieldSet.forEach((inputField) => {
         inputField.addEventListener('input', () => {
           this._checkInputValidity(inputField);
           this._toggleButtonState();
@@ -68,13 +60,12 @@ export class FormValidator {
     }); 
   }
 
-
-  hideError(inputField){
-    this._hideError(inputField);
-  }
-
-  disableSubmitButton(){
+  resetValidation() {
     this._toggleButtonState();
+
+    this._fieldSet.forEach((inputField) => {
+      this._hideError(inputField)
+    });
   }
 
   activateValidation (){
