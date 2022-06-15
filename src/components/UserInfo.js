@@ -12,18 +12,12 @@ export class UserInfo {
         }
     }
 
-    getUserId(data){
-        this.userId = data._id;
+    setUserInfo({ name, about, avatar, _id }){
+        this._name.textContent = name;
+        this._info.textContent = about;
+        this._avatar.src = avatar;
+        this.userId = _id;
     }
 
-
-    setUserInfo(data){
-        this._name.textContent = data.name;
-        this._info.textContent = data.about;
-    }
-
-    setUserAvatar(data){
-        this._avatar.src = data.avatar;
-    }
 }
 
