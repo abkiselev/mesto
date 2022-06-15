@@ -7,8 +7,8 @@ export class PopupDeleteCard extends Popup {
         this._formHandler = handleFormSubmit;
     }
 
-    _deleteCard(newCard){
-        this._formHandler(newCard)
+    _deleteCard(){
+        this._formHandler(this._cardToDelete)
     }
 
     toggleButtonText(){
@@ -20,13 +20,17 @@ export class PopupDeleteCard extends Popup {
         }
     }
 
+    setCardtoDelete(newCard){
+        this._cardToDelete = newCard;
+    }
 
-    open(newCard){
+
+    open(){
         this._button.addEventListener('click', (evt) => {  
             evt.preventDefault();  
             this.toggleButtonText();
-            this._deleteCard(newCard);
-        }, { once: true });
+            this._deleteCard();
+        });
 
         super.open();
     }

@@ -48,7 +48,7 @@ Promise.all([api.getInitialCards(), api.getProfileInfo()])
 
         cardsList.renderItems(initialCards.reverse(), info._id);
     })
-    .catch(err => console.log(err));
+    .catch(err => alert(`${err}, Что-то пошло не так, попробуйте обновить страницу`));
 
 
 const profileInfo = new UserInfo(
@@ -162,10 +162,10 @@ function createCard(data, userId){
                     .then((res) => {
                         newCard.setLikeCounter(res)
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => alert(`${err}, Попробуйте еще раз`));
             },
             handleCardDelete: (newCard) => {
-                popupDeleteCard.open(newCard)
+                popupDeleteCard.open(popupDeleteCard.setCardtoDelete(newCard))
             },
         }
     );
