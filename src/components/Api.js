@@ -35,6 +35,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
+    .then(res => this._getResponseData(res))
   }
 
 
@@ -43,7 +44,6 @@ export class Api {
       headers: this._headers
       })
       .then(res => this._getResponseData(res))
-    
   }
 
   changeProfileInfo({name, about}) {
@@ -56,7 +56,6 @@ export class Api {
       })
     })
     .then(res => this._getResponseData(res))
-
   }
 
   changeProfileAvatar({avatar}) {
@@ -68,7 +67,6 @@ export class Api {
       })
     })
     .then(res => this._getResponseData(res))
-
   }
 
   setCardLike(cardId, method) {
@@ -77,7 +75,6 @@ export class Api {
       headers: this._headers
     })
     .then(res => this._getResponseData(res))
-    
   }
   
 }

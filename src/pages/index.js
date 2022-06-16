@@ -62,16 +62,16 @@ const profileInfo = new UserInfo(
 
 const popupEditProfile = new PopupWithForm(
     '#edit-profile-popup',
-    ({name, info}) => {
-        api.changeProfileInfo({name, about: info})
+    ({name, about}) => {
+        api.changeProfileInfo({name, about})
             .then((res) => {
                 profileInfo.setUserInfo(res);                
                 popupEditProfile.close();
+            })
+            .catch(err => alert(`${err}, Попробуйте еще раз`))
+            .finally(() => {
                 popupEditProfile.toggleButtonText('Сохранить');
             })
-            .catch(err => {
-                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
-            });
     }
 );
 popupEditProfile.setEventListeners();
@@ -81,16 +81,17 @@ popupEditProfile.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm(
     '#edit-avatar-popup',
-    ({name}) => {
-        api.changeProfileAvatar({avatar: name})
+    ({avatar}) => {
+        api.changeProfileAvatar({avatar})
         .then((res) => {
             profileInfo.setUserInfo(res);
             popupEditAvatar.close();
+            
+        })
+        .catch(err => alert(`${err}, Попробуйте еще раз`))
+        .finally(() => {
             popupEditAvatar.toggleButtonText('Сохранить');
         })
-        .catch(err => {
-            popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
-        });
     }
 );
 popupEditAvatar.setEventListeners();
@@ -99,16 +100,16 @@ popupEditAvatar.setEventListeners();
 
 const popupAddCard = new PopupWithForm(
     '#add-foto-popup',
-    ({name, info}) => {
-        api.createNewCard({name, link: info})
+    ({name, link}) => {
+        api.createNewCard({name, link})
             .then((res) => {
                 cardsList.addItem(createCard(res, profileInfo.userId));
                 popupAddCard.close();
+            })
+            .catch(err => alert(`${err}, Попробуйте еще раз`))
+            .finally(() => {
                 popupAddCard.toggleButtonText('Создать');
             })
-            .catch(err => {
-                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
-            });
     }
 );
 popupAddCard.setEventListeners();
@@ -118,13 +119,13 @@ popupAddCard.setEventListeners();
 const imagePopup = new PopupWithImage('#foto-popup');
 imagePopup.setEventListeners();   
 
-const formCard = new FormValidator(formsData, 'add-card');
+const formCard = new FormValidator(formsData, formAddCard);
 formCard.activateValidation();
 
-const formProfile = new FormValidator(formsData, 'edit-profile');
+const formProfile = new FormValidator(formsData, formEditProfile);
 formProfile.activateValidation();
 
-const formAvatar = new FormValidator(formsData, 'edit-avatar');
+const formAvatar = new FormValidator(formsData, formEditAvatar);
 formAvatar.activateValidation();
 
 
@@ -137,11 +138,11 @@ const popupDeleteCard = new PopupDeleteCard(
             .then(() => {
                 newCard.remove();
                 popupDeleteCard.close();
+            })
+            .catch(err => alert(`${err}, Попробуйте еще раз`))
+            .finally(() => {
                 popupDeleteCard.toggleButtonText('Да');
             })
-            .catch(err => {
-                popupEditProfile.toggleButtonText(`${err}, Попробуйте еще раз`);
-            });
     }
 );
 popupDeleteCard.setEventListeners();
@@ -165,7 +166,8 @@ function createCard(data, userId){
                     .catch(err => alert(`${err}, Попробуйте еще раз`));
             },
             handleCardDelete: (newCard) => {
-                popupDeleteCard.open(popupDeleteCard.setCardtoDelete(newCard))
+                popupDeleteCard.setCardtoDelete(newCard);
+                popupDeleteCard.open();
             },
         }
     );
@@ -185,13 +187,12 @@ buttonAddCard.addEventListener('click', function () {
 
 
 buttonEditProfile.addEventListener('click', function () {
-    formProfile.resetValidation();
-
     const { name, info } = profileInfo.getUserInfo();
 
     nameInput.value = name;
     jobInput.value = info;
 
+    formProfile.resetValidation();
     popupEditProfile.open();
 });
 
