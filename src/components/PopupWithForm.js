@@ -10,13 +10,9 @@ export class PopupWithForm extends Popup {
     }
 
     _getInputValues(){
-        const inputValues = {};
-        if(this._inputs.length > 1){
-            inputValues.name = this._inputs[0].value;
-            inputValues.info = this._inputs[1].value;
-        } inputValues.name = this._inputs[0].value;
-
-        return inputValues
+        this._inputValues = {};
+        this._inputs.forEach(input => this._inputValues[input.name] = input.value);   
+        return this._inputValues;
     }
 
     toggleButtonText(text){

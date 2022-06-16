@@ -33,7 +33,7 @@ export class Card {
   }
 
 
-  _remove(){
+  remove(){
     this._element.remove();
     this._element = null;
   }
@@ -88,10 +88,6 @@ export class Card {
     this._buttonLike.addEventListener('click', () => {
         this._likeCard();
     });
-  }
-
-  remove(){
-    this._remove();
   }
 
   generateCard(data){

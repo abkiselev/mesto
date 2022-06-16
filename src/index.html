@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<%=require('./images/favicon.svg')%>" type="image/svg+xml">
     <title>Mesto Russia</title>
 </head>
 <body class="page">
@@ -50,6 +51,7 @@
             <form name="edit-profile" class="edit-profile popup__form" novalidate>
                 <fieldset class="popup__inputs">
                     <input 
+                    name="name"
                     id="edit-profile-name"
                     class="popup__input popup__input_type_name" 
                     type="text" 
@@ -59,8 +61,9 @@
                     novalidate
                     required
                     >
-                    <span class="popup__error edit-profile-name-error"></span>
+                    <p class="popup__error edit-profile-name-error"></p>
                     <input 
+                    name="about"
                     id="edit-profile-bio"
                     class="popup__input popup__input_type_descr" 
                     type="text" 
@@ -70,7 +73,7 @@
                     novalidate
                     required
                     >
-                    <span class="popup__error edit-profile-bio-error"></span>
+                    <p class="popup__error edit-profile-bio-error"></p>
                 </fieldset>
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
@@ -87,6 +90,7 @@
             <form name="add-card" class="add-foto add-card popup__form" novalidate>
                 <fieldset class="popup__inputs">
                     <input 
+                    name="name"
                     id="edit-foto-name"
                     class="popup__input popup__input_type_mesto-name" 
                     type="text" 
@@ -97,8 +101,9 @@
                     novalidate
                     required
                     >
-                    <span class="popup__error edit-foto-name-error"></span>
+                    <p class="popup__error edit-foto-name-error"></p>
                     <input 
+                    name="link"
                     id="edit-foto-url"
                     class="popup__input popup__input_type_mesto-url" 
                     type="url" 
@@ -107,7 +112,7 @@
                     novalidate
                     required
                     >
-                    <span class="popup__error edit-foto-url-error"></span>
+                    <p class="popup__error edit-foto-url-error"></p>
                 </fieldset>
                 <button type="submit" class="popup__button popup__add-button">Создать</button>
             </form>
@@ -130,9 +135,9 @@
             <h2 class="popup__title">
                 Вы уверены?
             </h2>
-            <!-- <form name="delete-card" class="delete-card popup__form" novalidate></form> -->
+            <form name="delete-card" class="delete-card popup__form" novalidate>
                 <button type="submit" class="popup__button popup__delete-card-button">Да</button>
-            <!-- </form> -->
+            </form>
             <button class="popup__close" type="button"></button>
         </div>
         <div class="popup__bg"></div>
@@ -145,8 +150,8 @@
             </h2>
             <form name="add-card" class="edit-avatar popup__form" novalidate>
                 <fieldset class="popup__inputs">
-                    
                     <input 
+                    name="avatar"
                     id="edit-avatar-url"
                     class="popup__input popup__input_type_mesto-url" 
                     type="url" 
@@ -155,7 +160,7 @@
                     novalidate
                     required
                     >
-                    <span class="popup__error edit-avatar-url-error"></span>
+                    <p class="popup__error edit-avatar-url-error"></p>
                 </fieldset>
                 <button type="submit" class="popup__button popup__add-button">Сохранить</button>
             </form>
